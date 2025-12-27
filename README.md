@@ -212,3 +212,4 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 - [2025-12-04 02:27:44] Update README
 - [2026-04-09 02:27:44] Add validation
 - [2026-07-07 02:27:44] Improve accessibility
+- [2025-12-28 02:27:44] Improve error handling
