@@ -157,3 +157,5 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 - **2026-08-05**: style: Improve code formatting
 
 - **2026-08-05**: docs: Add architecture documentation
+
+- **2026-05-07**: Update documentation
