@@ -161,3 +161,5 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 - **2026-05-07**: Update documentation
 
 - **2026-05-08**: Improve UI/UX
+
+- **2026-05-18**: Improve performance
