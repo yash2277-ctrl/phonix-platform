@@ -318,3 +318,4 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 - [2026-06-08 02:27:44] Improve accessibility
 - [2026-04-10 02:27:44] Fix bugs and issues
 - [2026-03-13 02:27:44] Add new features
+- [2026-05-21 02:27:44] Update documentation
