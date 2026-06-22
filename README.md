@@ -206,3 +206,4 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 - [2026-02-09 02:27:44] Update configuration
 - [2025-09-20 02:27:44] Add new features
 - [2025-10-09 02:27:44] Add API endpoints
+- [2026-06-23 02:27:44] Update documentation
