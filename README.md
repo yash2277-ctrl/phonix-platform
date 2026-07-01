@@ -173,3 +173,5 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
 - **2026-06-23**: Improve error handling
 
 - **2026-06-28**: Improve UI/UX
+
+- **2026-07-02**: Improve error handling
