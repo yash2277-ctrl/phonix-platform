@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PHØNIX</title>
+<meta name="theme-color" content="#000000">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="PHØNIX">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script src="assets/theme.js?v=1"></script>
+<link rel="stylesheet" href="assets/chat.css?v=14">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><rect x='8' y='8' width='16' height='16' fill='%23FF3000'/></svg>">
+</head>
+<body>
+
+<!-- ═══ ICON SPRITE ═══ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-plus" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></symbol>
+<symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 11.5a8.4 8.4 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.4 8.4 0 0 1-3.8-.9L3 21l1.9-5.7a8.4 8.4 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.4 8.4 0 0 1 3.8-.9h.5a8.5 8.5 0 0 1 8 8v.5z"/></symbol>
+<symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+<symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></symbol>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+<symbol id="i-brain" viewBox="0 0 24 24"><path d="M12 5a3 3 0 1 0-5.9.6"/><path d="M12 5a3 3 0 1 1 5.9.6"/><path d="M6.1 5.6A3 3 0 0 0 4 11a3 3 0 0 0 1 5.8"/><path d="M17.9 5.6A3 3 0 0 1 20 11a3 3 0 0 1-1 5.8"/><path d="M5 16.8A3 3 0 0 0 9 21a3 3 0 0 0 3-3V5"/><path d="M19 16.8A3 3 0 0 1 15 21a3 3 0 0 1-3-3"/></symbol>
+<symbol id="i-tool" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+<symbol id="i-send" viewBox="0 0 24 24"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></symbol>
+<symbol id="i-stop" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/></symbol>
+<symbol id="i-paperclip" viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/></symbol>
+<symbol id="i-mic" viewBox="0 0 24 24"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+<symbol id="i-refresh" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></symbol>
+<symbol id="i-up" viewBox="0 0 24 24"><path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="M10 15v4a3 3 0 0 0 3 3l4-9V2H5.72a2 2 0 0 0-2 1.7l-1.38 9a2 2 0 0 0 2 2.3zm7-13h2.67A2.31 2.31 0 0 1 22 4v7a2.31 2.31 0 0 1-2.33 2H17"/></symbol>
+<symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></symbol>
+<symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></symbol>
+<symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+<symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+<symbol id="i-menu" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+<symbol id="i-trash" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+<symbol id="i-edit" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.12 2.12 0 0 1 3 3L12 15l-4 1 1-4z"/></symbol>
+<symbol id="i-pin" viewBox="0 0 24 24"><line x1="12" y1="17" x2="12" y2="22"/><path d="M5 17h14l-1.7-3.4A2 2 0 0 1 17 12.7V7a2 2 0 0 0-2-2H9a2 2 0 0 0-2 2v5.7a2 2 0 0 1-.3 1L5 17z"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></symbol>
+<symbol id="i-chart" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></symbol>
+<symbol id="i-key" viewBox="0 0 24 24"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.778 7.778 5.5 5.5 0 0 1 7.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3"/></symbol>
+<symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+<symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></symbol>
+<symbol id="i-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+<symbol id="i-chevdown" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></symbol>
+<symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+<symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3l1.9 5.6L19.5 10l-5.6 1.9L12 17.5l-1.9-5.6L4.5 10l5.6-1.4L12 3z"/></symbol>
+<symbol id="i-more" viewBox="0 0 24 24"><circle cx="12" cy="12" r="1"/><circle cx="12" cy="5" r="1"/><circle cx="12" cy="19" r="1"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+<symbol id="i-alert" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></symbol>
+</defs></svg>
+
+<div class="scrim" id="scrim" onclick="closeSidebar()" aria-hidden="true"></div>
+
+<!-- ═══ SIDEBAR ═══ -->
+<aside class="sidebar" id="sidebar">
+  <div class="side-top">
+    <div class="brand">
+      <div class="mark"></div>
+      <span class="brand-name">Phønix</span>
+    </div>
+    <button class="ib" id="closeSidebar" onclick="toggleSidebar()" aria-label="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+  </div>
+
+  <button class="compose-btn" onclick="newConversation()">
+    <svg class="ic"><use href="#i-plus"/></svg><span>New chat</span><kbd>⌘K</kbd>
+  </button>
+
+  <nav class="nav" id="sideTabs">
+    <button class="nav-item active" data-tab="chats" onclick="switchTab('chats')"><svg class="ic"><use href="#i-chat"/></svg><span>01. Chats</span><em id="cChats"></em></button>
+    <button class="nav-item" data-tab="projects" onclick="switchTab('projects')"><svg class="ic"><use href="#i-folder"/></svg><span>02. Projects</span><em id="cProjects"></em></button>
+    <button class="nav-item" data-tab="artifacts" onclick="switchTab('artifacts')"><svg class="ic"><use href="#i-file"/></svg><span>03. Artifacts</span><em id="cArtifacts"></em></button>
+    <button class="nav-item" data-tab="knowledge" onclick="switchTab('knowledge')"><svg class="ic"><use href="#i-book"/></svg><span>04. Knowledge</span><em id="cKnowledge"></em></button>
+    <button class="nav-item" data-tab="prompts" onclick="switchTab('prompts')"><svg class="ic"><use href="#i-bolt"/></svg><span>05. Prompts</span><em id="cPrompts"></em></button>
+  </nav>
+
+  <div class="side-search">
+    <svg class="ic"><use href="#i-search"/></svg>
+    <input type="text" placeholder="Search" id="searchInput" oninput="onSearchInput()">
+  </div>
+
+  <div class="side-body">
+    <div class="side-panel active" id="panel-chats"><div class="list" id="convList"></div></div>
+    <div class="side-panel" id="panel-projects"><div class="list" id="projectList"></div></div>
+    <div class="side-panel" id="panel-artifacts"><div class="list" id="artifactList"></div></div>
+    <div class="side-panel" id="panel-knowledge"><div class="list" id="knowledgeList"></div></div>
+    <div class="side-panel" id="panel-prompts"><div class="list" id="promptList"></div></div>
+  </div>
+
+  <div class="side-foot">
+    <div class="meter" title="Daily usage">
+      <div class="meter-row"><span id="usageText">—</span><span id="usagePct"></span></div>
+      <div class="meter-bar"><div class="meter-fill" id="usageFill"></div></div>
+    </div>
+    <button class="acct" onclick="toggleUserMenu()">
+      <div class="avatar" id="userAvatar">?</div>
+      <div class="acct-info">
+        <div class="acct-name" id="userName">User</div>
+        <div class="acct-plan" id="userPlan">Free</div>
+      </div>
+      <svg class="ic sm"><use href="#i-more"/></svg>
+    </button>
+    <div class="menu" id="userMenu">
+      <button onclick="showSettings()"><svg class="ic"><use href="#i-settings"/></svg>Settings</button>
+      <button onclick="showMemories()"><svg class="ic"><use href="#i-brain"/></svg>Memory</button>
+      <button onclick="showUsage()"><svg class="ic"><use href="#i-chart"/></svg>Usage</button>
+      <button onclick="showKeys()"><svg class="ic"><use href="#i-key"/></svg>API keys</button>
+      <button onclick="showShares()"><svg class="ic"><use href="#i-link"/></svg>Shared links</button>
+      <button onclick="showTrash()"><svg class="ic"><use href="#i-trash"/></svg>Trash</button>
+      <div class="menu-sep"></div>
+      <button onclick="exportData()"><svg class="ic"><use href="#i-download"/></svg>Export data</button>
+      <button onclick="logout()" class="danger"><svg class="ic"><use href="#i-logout"/></svg>Sign out</button>
+    </div>
+  </div>
+</aside>
+
+<!-- ═══ MAIN ═══ -->
+<main class="main">
+  <header class="topbar">
+    <div class="tb-left">
+      <button class="ib" id="openSidebar" onclick="toggleSidebar()"><svg class="ic"><use href="#i-menu"/></svg></button>
+      <button class="model-btn" onclick="toggleModelMenu()">
+        <span class="dot"></span><span id="currentModel">Blaze</span>
+        <svg class="ic sm"><use href="#i-chevdown"/></svg>
+      </button>
+      <div class="menu model-menu" id="modelMenu"></div>
+    </div>
+    <div class="tb-title" id="chatTitle">New chat</div>
+    <div class="tb-right">
+      <div class="seg" role="group">
+        <button class="seg-b on" id="tglThink" onclick="toggleFeature('thinking')" title="Extended thinking"><svg class="ic"><use href="#i-brain"/></svg></button>
+        <button class="seg-b on" id="tglTools" onclick="toggleFeature('tools')" title="Tools"><svg class="ic"><use href="#i-tool"/></svg></button>
+        <button class="seg-b on" id="tglKnow" onclick="toggleFeature('knowledge')" title="Knowledge base"><svg class="ic"><use href="#i-book"/></svg></button>
+      </div>
+      <button class="ib" onclick="shareConversation()" title="Share"><svg class="ic"><use href="#i-share"/></svg></button>
+      <button class="ib" id="themeToggle" data-theme-toggle onclick="toggleTheme()" title="Theme"><svg class="ic"><use href="#i-moon"/></svg></button>
+    </div>
+  </header>
+
+  <div class="welcome" id="welcomeScreen">
+    <div class="welcome-in">
+      <div class="mark lg"></div>
+      <h1>How can I<br><em>help?</em></h1>
+      <p>Searches your documents, runs code, computes exact figures, and builds artifacts you keep.</p>
+      <div class="cards">
+        <button class="card" onclick="useSuggestion(this)">
+          <svg class="ic"><use href="#i-tool"/></svg>
+          <span class="c-t">Calculate</span>
+          <span class="c-s">What's 17.5% of 2,340 plus VAT?</span>
+        </button>
+        <button class="card" onclick="useSuggestion(this)">
+          <svg class="ic"><use href="#i-code"/></svg>
+          <span class="c-t">Write code</span>
+          <span class="c-s">A Python script to dedupe a CSV</span>
+        </button>
+        <button class="card" onclick="useSuggestion(this)">
+          <svg class="ic"><use href="#i-book"/></svg>
+          <span class="c-t">Ask documents</span>
+          <span class="c-s">Summarise my knowledge base</span>
+        </button>
+        <button class="card" onclick="useSuggestion(this)">
+          <svg class="ic"><use href="#i-sparkle"/></svg>
+          <span class="c-t">Reason</span>
+          <span class="c-s">Explain recursion with an analogy</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="thread" id="messagesArea"></div>
+
+  <div class="composer-wrap">
+    <div class="chips" id="suggestionChips"></div>
+    <div class="attachments" id="filePreview"></div>
+    <div class="composer">
+      <textarea id="messageInput" rows="1" placeholder="Message Phønix" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <div class="composer-bar">
+        <div class="cb-left">
+          <button class="ib" onclick="triggerFileUpload()" title="Attach"><svg class="ic"><use href="#i-paperclip"/></svg></button>
+          <button class="ib" onclick="openPromptPicker()" title="Prompts"><svg class="ic"><use href="#i-bolt"/></svg></button>
+          <button class="ib" onclick="toggleVoice()" id="voiceBtn" title="Voice"><svg class="ic"><use href="#i-mic"/></svg></button>
+        </div>
+        <div class="cb-right">
+          <span class="hintk">↵ Send · ⇧↵ Newline</span>
+          <button class="send" id="sendBtn" onclick="sendMessage()" disabled><svg class="ic"><use href="#i-send"/></svg></button>
+          <button class="send stop" id="stopBtn" onclick="stopGeneration()" style="display:none"><svg class="ic"><use href="#i-stop"/></svg></button>
+        </div>
+      </div>
+    </div>
+    <input type="file" id="fileInput" style="display:none" onchange="handleFile(event)" multiple>
+    <div class="disclaimer">Phønix can make mistakes — verify important information</div>
+  </div>
+</main>
+
+<!-- ═══ ARTIFACT PANEL ═══ -->
+<aside class="panel" id="artifactPanel">
+  <div class="panel-head">
+    <div class="ph-main">
+      <div class="ph-title" id="apTitle">Artifact</div>
+      <div class="ph-meta" id="apMeta"></div>
+    </div>
+    <div class="ph-acts">
+      <button class="ib" onclick="copyArtifact()" title="Copy"><svg class="ic"><use href="#i-copy"/></svg></button>
+      <button class="ib" onclick="downloadArtifact()" title="Download"><svg class="ic"><use href="#i-download"/></svg></button>
+      <button class="ib" onclick="publishArtifact()" title="Publish"><svg class="ic"><use href="#i-globe"/></svg></button>
+      <button class="ib" onclick="showVersions()" title="History"><svg class="ic"><use href="#i-clock"/></svg></button>
+      <button class="ib" onclick="closeArtifact()" title="Close"><svg class="ic"><use href="#i-x"/></svg></button>
+    </div>
+  </div>
+  <div class="panel-body" id="apBody"></div>
+  <div class="panel-versions" id="apVersions"></div>
+</aside>
+
+<!-- ═══ COMMAND PALETTE ═══ -->
+<div class="overlay palette-overlay" id="palette" onclick="if(event.target===this)closePalette()">
+  <div class="palette">
+    <div class="palette-in">
+      <svg class="ic"><use href="#i-search"/></svg>
+      <input id="paletteInput" placeholder="Search or jump to" oninput="paletteSearch()" onkeydown="paletteKey(event)">
+      <kbd>esc</kbd>
+    </div>
+    <div class="palette-list" id="paletteResults"></div>
+  </div>
+</div>
+
+<!-- ═══ MODALS ═══ -->
+<div class="overlay" id="genericModal">
+  <div class="sheet">
+    <div class="sheet-head"><h2 id="gmTitle"></h2><button class="ib" onclick="closeModal('genericModal')"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="sheet-body" id="gmBody"></div>
+  </div>
+</div>
+
+<div class="overlay" id="settingsModal">
+  <div class="sheet">
+    <div class="sheet-head"><h2>Settings</h2><button class="ib" onclick="closeModal('settingsModal')"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="sheet-body">
+      <div class="fld"><label>Display name</label><input type="text" id="settingsName" class="in"></div>
+      <div class="fld"><label>Custom instructions<em>How Phønix should respond to you</em></label>
+        <textarea id="settingsInstructions" class="in" rows="4" placeholder="Be concise. I use TypeScript."></textarea></div>
+      <div class="fld2">
+        <div class="fld"><label>Theme</label><select id="settingsTheme" class="in" onchange="setTheme(this.value)"><option value="dark">Dark</option><option value="light">Light</option></select></div>
+        <div class="fld"><label>Default model</label><select id="settingsModel" class="in"></select></div>
+      </div>
+      <button class="btn primary" onclick="saveSettings()">Save changes</button>
+      <div class="zone"><button class="btn danger" onclick="confirmDeleteAccount()">Delete account</button></div>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="memoriesModal">
+  <div class="sheet">
+    <div class="sheet-head"><h2>Memory</h2><button class="ib" onclick="closeModal('memoriesModal')"><svg class="ic"><use href="#i-x"/></svg></button></div>
+    <div class="sheet-body">
+      <p class="lede">Persisted across every conversation. Some entries are learned automatically.</p>
+      <div id="memoriesList" class="mem-list"></div>
+      <div class="mem-add">
+        <div class="fld2">
+          <div class="fld"><label>Topic</label><input type="text" id="memoryKey" class="in" placeholder="coding style"></div>
+          <div class="fld"><label>Type</label><select id="memoryType" class="in">
+            <option value="FACT">Fact</option><option value="PREFERENCE">Preference</option>
+            <option value="CONTEXT">Context</option><option value="INSTRUCTION">Instruction</option></select></div>
+        </div>
+        <div class="fld"><label>Detail</label><input type="text" id="memoryValue" class="in" placeholder="prefers TypeScript, no semicolons"></div>
+        <button class="btn" onclick="addMemory()">Add memory</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/3.1.6/purify.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github-dark.min.css">
+<script src="assets/chat.js?v=14"></script>
+</body>
+</html>

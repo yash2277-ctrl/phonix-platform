@@ -1,0 +1,27 @@
+# Environment Variables (SENSITIVE!)
+.env
+*.env
+!.env.example
+
+# Database (SENSITIVE - Contains user data!)
+*.db
+*.db-shm
+*.db-wal
+
+# Dependencies
+node_modules/
+**/node_modules/
+.trash-next-modules/
+
+# Build
+.next/
+out/
+dist/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
