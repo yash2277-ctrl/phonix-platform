@@ -138,3 +138,8 @@ node -e "console.log(require('crypto').randomBytes(48).toString('hex'))"
   unreachable the UI shows a clear message rather than hanging.
 - **Uploads** are written to `uploads/` and are git-ignored, as are `.env`,
   `.secrets.json`, and the database files.
+
+
+## Recent Updates
+
+- **2026-08-05**: style: Improve code formatting
