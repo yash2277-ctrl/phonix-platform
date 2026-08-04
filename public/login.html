@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PHØNIX — SIGN IN</title>
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/swiss.css?v=2">
+<script src="assets/theme.js?v=1"></script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><rect x='8' y='8' width='16' height='16' fill='%23FF3000'/></svg>">
+<style>
+body{min-height:100vh;font-size:16px;line-height:1.5}
+.login-card{min-height:100vh;display:grid;grid-template-columns:1fr}
+@media(min-width:1024px){.login-card{grid-template-columns:6fr 6fr}}
+
+/* ── LEFT: statement panel ── */
+.aside{display:none;background:var(--fg);color:var(--bg);
+  border-right:var(--bd-thick) solid var(--border);padding:var(--s8);
+  flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+@media(min-width:1024px){.aside{display:flex}}
+.aside .tex-layer{position:absolute;inset:0;pointer-events:none;
+  background-image:linear-gradient(to right,#fff 1px,transparent 1px),linear-gradient(to bottom,#fff 1px,transparent 1px);
+  background-size:24px 24px;opacity:.05}
+.aside>*{position:relative;z-index:1}
+.aside .quote{font-size:clamp(30px,3.2vw,46px);font-weight:900;line-height:.95;
+  letter-spacing:-.045em;text-transform:uppercase}
+.aside .quote em{font-style:normal;color:var(--accent)}
+.aside .by{margin-top:var(--s4);font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.aside .stats{display:grid;grid-template-columns:1fr 1fr;border-top:var(--bd) solid rgba(255,255,255,.25)}
+.aside .stats>div{padding:var(--s4) 0;border-right:var(--bd) solid rgba(255,255,255,.25);padding-right:var(--s4)}
+.aside .stats>div:last-child{border-right:0;padding-left:var(--s4)}
+.aside .stats span{display:block;font-family:var(--mono);font-size:44px;font-weight:700;
+  letter-spacing:-.04em;line-height:1}
+.aside .stats small{display:block;margin-top:var(--s1);font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;opacity:.7}
+
+/* ── RIGHT: form ── */
+.pane{padding:var(--s6) var(--s3);display:flex;flex-direction:column;justify-content:center;width:100%;max-width:600px;margin:0 auto}
+@media(min-width:768px){.pane{padding:var(--s8)}}
+.logo{margin-bottom:var(--s6)}
+.logo-icon{width:44px;height:44px;background:var(--fg);position:relative;margin-bottom:var(--s3)}
+.logo-icon span{display:none}
+.logo-icon::after{content:'';position:absolute;inset:11px;background:var(--accent)}
+.logo h1{font-size:30px;font-weight:900;letter-spacing:-.04em;text-transform:uppercase}
+.logo h1 .o{-webkit-text-fill-color:currentColor;background:none}
+.logo p{margin-top:var(--s1);font-size:11px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--accent)}
+
+/* segmented tabs = two hard rectangles */
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:var(--bd) solid var(--border);margin-bottom:var(--s6)}
+.tab{height:52px;background:var(--bg);color:var(--fg);font-size:11px;font-weight:700;
+  letter-spacing:.14em;text-transform:uppercase;cursor:pointer;
+  border-right:var(--bd) solid var(--border);transition:background var(--snap),color var(--snap)}
+.tab:last-child{border-right:0}
+.tab:hover{background:var(--muted)}
+.tab.active{background:var(--fg);color:var(--bg)}
+
+.form-group{margin-bottom:var(--s3)}
+.form-group label{display:block;font-size:11px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;margin-bottom:var(--s1)}
+.form-group input{width:100%;height:56px;padding:0 var(--s2);background:var(--bg);color:var(--fg);
+  border:var(--bd) solid var(--border);outline:none;font-size:16px;transition:border-color var(--snap)}
+.form-group input:focus{border-color:var(--accent)}
+.form-group input::placeholder{color:var(--fg-45)}
+.pw-wrap{position:relative}
+.pw-toggle{position:absolute;right:0;top:0;width:56px;height:56px;background:none;
+  border-left:var(--bd) solid var(--border);cursor:pointer;font-size:11px;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;transition:background var(--snap),color var(--snap)}
+.pw-toggle:hover{background:var(--fg);color:var(--bg)}
+.error{border:var(--bd) solid var(--accent);border-left:var(--bd-thick) solid var(--accent);
+  padding:var(--s2);margin-bottom:var(--s3);font-size:13px;font-weight:700;color:var(--accent);
+  display:none;text-transform:uppercase;letter-spacing:.04em}
+.error.show{display:block}
+.submit-btn{width:100%;height:56px;border:var(--bd) solid var(--accent);background:var(--accent);
+  color:var(--on-accent);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;margin-top:var(--s2);position:relative;transition:background var(--snap),color var(--snap),border-color var(--snap)}
+.submit-btn:hover{background:var(--fg);border-color:var(--border);color:var(--bg)}
+.submit-btn:disabled{opacity:.5;cursor:not-allowed}
+.submit-btn .spinner{display:none;width:18px;height:18px;border:2px solid rgba(255,255,255,.4);
+  border-top-color:#fff;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
+.submit-btn.loading .spinner{display:block} .submit-btn.loading .btn-text{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+.divider{display:flex;align-items:center;gap:var(--s2);margin:var(--s4) 0;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--fg-45)}
+.divider::before,.divider::after{content:'';flex:1;height:var(--bd);background:var(--border)}
+.guest-btn{width:100%;height:56px;border:var(--bd) solid var(--border);background:var(--bg);
+  color:var(--fg);font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  cursor:pointer;transition:background var(--snap),color var(--snap)}
+.guest-btn:hover{background:var(--fg);color:var(--bg)}
+.footer{margin-top:var(--s6);padding-top:var(--s3);border-top:var(--bd) solid var(--border);
+  font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--fg-45);line-height:1.7}
+.footer a{color:var(--fg)}
+.footer a:hover{color:var(--accent)}
+/* theme toggle */
+.theme-btn{position:fixed;top:var(--s2);right:var(--s2);z-index:50;
+  width:48px;height:48px;display:grid;place-items:center;
+  border:var(--bd) solid var(--border);background:var(--bg);color:var(--fg);
+  cursor:pointer;transition:background var(--snap),color var(--snap)}
+.theme-btn:hover{background:var(--fg);color:var(--bg)}
+.theme-btn .ti{width:18px;height:18px;stroke:currentColor;stroke-width:2;
+  stroke-linecap:square;stroke-linejoin:miter;fill:none}
+/* the brand panel is always inverted, so it needs its own border in dark */
+html.dark .aside{border-right-color:var(--border)}
+html.dark .aside .stats{border-top-color:rgba(255,255,255,.3)}
+html.dark .aside .stats>div{border-right-color:rgba(255,255,255,.3)}
+#signupFields{display:none}
+.bg-glow{display:none}
+
+/* ═══ MOBILE ═══ */
+@media(max-width:560px){
+  body{padding:0;align-items:stretch}
+  .login-card{min-height:100dvh;border:0}
+  .pane{padding:calc(var(--s8) + env(safe-area-inset-top)) var(--s3)
+        calc(var(--s6) + env(safe-area-inset-bottom));
+        justify-content:flex-start;max-width:100%}
+  .logo{margin-bottom:var(--s4)}
+  .logo-icon{width:40px;height:40px;margin-bottom:var(--s2)}
+  .logo-icon::after{inset:10px}
+  .logo h1{font-size:26px}
+  .tabs{margin-bottom:var(--s4)}
+  .tab{height:52px;font-size:11px}
+  .form-group input{height:56px;font-size:16px}   /* 16px prevents iOS auto-zoom */
+  .submit-btn,.guest-btn{height:56px}
+  .pw-toggle{width:60px;height:56px}
+  .divider{margin:var(--s3) 0}
+  .footer{margin-top:var(--s4)}
+}
+@media(hover:none){
+  .tab:active{background:var(--fg);color:var(--bg)}
+  .submit-btn:active{background:var(--fg);border-color:var(--border);color:var(--bg)}
+  .guest-btn:active{background:var(--fg);color:var(--bg)}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></symbol>
+</defs></svg>
+<div class="bg-glow g1"></div>
+<div class="bg-glow g2"></div>
+
+<button class="theme-btn" data-theme-toggle onclick="PhonixTheme.toggle()" aria-label="Toggle theme">
+  <svg class="ti" viewBox="0 0 24 24"><use href="#i-moon"/></svg>
+</button>
+
+<div class="login-card">
+  <div class="aside"><div class="tex-layer"></div>
+    <div class="quote">It stopped feeling<br>like a tool. It became<br>a <em>colleague.</em></div>
+    <div class="by">Maya L. — Founder, Vector</div>
+    <div class="stats">
+      <div><span>50</span><small>Free msgs / day</small></div>
+      <div><span>&lt;1s</span><small>To first token</small></div>
+    </div>
+  </div>
+
+  <div class="pane">
+  <div class="logo">
+    <div class="logo-icon"><span></span><span></span><span></span></div>
+    <h1>PH<span class="o">Ø</span>NIX</h1>
+    <p id="subtitle">Welcome back</p>
+  </div>
+
+  <div class="tabs">
+    <button class="tab active" id="loginTab" onclick="switchTab('login')">Sign in</button>
+    <button class="tab" id="signupTab" onclick="switchTab('signup')">Create account</button>
+  </div>
+
+  <div class="error" id="errorMsg"><span id="errorText"></span></div>
+
+  <form id="authForm" onsubmit="handleSubmit(event)">
+    <div id="signupFields">
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Choose a username" autocomplete="username">
+      </div>
+      <div class="form-group">
+        <label>Display name</label>
+        <input type="text" id="displayName" placeholder="What should we call you?">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email</label>
+      <input type="email" id="email" placeholder="you@example.com" autocomplete="email" required>
+    </div>
+    <div class="form-group">
+      <label>Password</label>
+      <div class="pw-wrap">
+        <input type="password" id="password" placeholder="••••••••" autocomplete="current-password" required>
+        <button type="button" class="pw-toggle" onclick="togglePw()">Show</button>
+      </div>
+    </div>
+    <button type="submit" class="submit-btn" id="submitBtn">
+      <span class="btn-text">Sign in</span>
+      <div class="spinner"></div>
+    </button>
+  </form>
+
+  <div class="divider">or</div>
+  <button class="guest-btn" onclick="guestLogin()">Continue as guest</button>
+
+  <div class="footer">
+    <p>By continuing you agree to the <a href="#">Terms</a> and <a href="#">Privacy Policy</a></p>
+  </div>
+  </div>
+</div>
+
+<script>
+const API = window.location.origin;
+let mode = 'login';
+
+function switchTab(tab) {
+  mode = tab;
+  document.getElementById('loginTab').classList.toggle('active', tab === 'login');
+  document.getElementById('signupTab').classList.toggle('active', tab === 'signup');
+  document.getElementById('signupFields').style.display = tab === 'signup' ? 'block' : 'none';
+  document.querySelector('.btn-text').textContent = tab === 'login' ? 'Sign in' : 'Create account';
+  document.getElementById('subtitle').textContent = tab === 'login' ? "Welcome back. Let's rise." : 'Join the next evolution.';
+  hideError();
+}
+
+function showError(msg) {
+  document.getElementById('errorText').textContent = msg;
+  document.getElementById('errorMsg').classList.add('show');
+}
+function hideError() { document.getElementById('errorMsg').classList.remove('show'); }
+
+function togglePw() {
+  const pw = document.getElementById('password');
+  const showing = pw.type === 'password';
+  pw.type = showing ? 'text' : 'password';
+  document.querySelector('.pw-toggle').textContent = showing ? 'Hide' : 'Show';
+}
+
+async function handleSubmit(e) {
+  e.preventDefault();
+  hideError();
+  const btn = document.getElementById('submitBtn');
+  btn.classList.add('loading');
+  btn.disabled = true;
+
+  const email = document.getElementById('email').value;
+  const password = document.getElementById('password').value;
+
+  try {
+    if (mode === 'login') {
+      const res = await fetch(API + '/api/v1/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password })
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error?.message || 'Login failed');
+      localStorage.setItem('phonix_token', data.data.accessToken);
+      localStorage.setItem('phonix_user', JSON.stringify(data.data.user));
+      window.location.href = '/chat';
+    } else {
+      const username = document.getElementById('username').value;
+      const displayName = document.getElementById('displayName').value;
+      if (!username) throw new Error('Username is required');
+      const res = await fetch(API + '/api/v1/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include',
+        body: JSON.stringify({ email, password, username, displayName: displayName || username })
+      });
+      const data = await res.json();
+      if (!data.success) throw new Error(data.error?.message || 'Registration failed');
+      localStorage.setItem('phonix_token', data.data.accessToken);
+      localStorage.setItem('phonix_user', JSON.stringify(data.data.user));
+      window.location.href = '/chat';
+    }
+  } catch (err) {
+    showError(err.message);
+  } finally {
+    btn.classList.remove('loading');
+    btn.disabled = false;
+  }
+}
+
+function guestLogin() {
+  // Guest gets a temporary session
+  const guestId = 'guest-' + Date.now();
+  localStorage.setItem('phonix_user', JSON.stringify({ id: guestId, username: 'guest', display_name: 'Explorer', plan: 'FREE' }));
+  localStorage.setItem('phonix_guest', '1');
+  window.location.href = '/chat';
+}
+
+// If already logged in, redirect
+if (localStorage.getItem('phonix_token') || localStorage.getItem('phonix_guest')) {
+  window.location.href = '/chat';
+}
+</script>
+</body>
+</html>

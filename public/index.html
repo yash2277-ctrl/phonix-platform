@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>PHØNIX — AI WORKSPACE</title>
+<meta name="description" content="An AI workspace that reasons, remembers, and creates alongside you. Free to start.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="assets/swiss.css?v=2">
+<script src="assets/theme.js?v=1"></script>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%23000'/><rect x='8' y='8' width='16' height='16' fill='%23FF3000'/></svg>">
+<style>
+/* ── PAGE-SPECIFIC LAYOUT. Tokens come from swiss.css ── */
+body{font-size:16px;line-height:1.5;overflow-x:hidden}
+.wrap{max-width:1440px;margin:0 auto;padding:0 var(--s3)}
+@media(min-width:768px){.wrap{padding:0 var(--s6)}}
+
+/* ═══ NAV ═══ */
+.nav{position:sticky;top:0;z-index:100;background:var(--bg);border-bottom:var(--bd-thick) solid var(--border)}
+.nav-in{display:flex;align-items:stretch;height:80px}
+.brand{display:flex;align-items:center;gap:var(--s2);padding-right:var(--s6);
+  border-right:var(--bd) solid var(--border);margin-right:var(--s6)}
+.brand-mark{width:28px;height:28px;background:var(--fg);position:relative;flex-shrink:0}
+.brand-mark::after{content:'';position:absolute;inset:7px;background:var(--accent)}
+.brand-name{font-size:18px;font-weight:900;letter-spacing:-.03em;text-transform:uppercase}
+.nav-links{display:none;align-items:center;gap:var(--s6);flex:1}
+@media(min-width:1024px){.nav-links{display:flex}}
+/* Vertical slide micro-interaction */
+.nlink{position:relative;overflow:hidden;height:16px;display:block;
+  font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase}
+.nlink span{display:block;transition:transform var(--out)}
+.nlink span:last-child{position:absolute;top:100%;left:0;color:var(--accent)}
+.nlink:hover span{transform:translateY(-100%)}
+.nav-act{display:flex;align-items:center;margin-left:auto;gap:0}
+.nav-act a{display:flex;align-items:center;padding:0 var(--s4);height:100%;
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  border-left:var(--bd) solid var(--border);transition:background var(--snap),color var(--snap)}
+.nav-act a:hover{background:var(--fg);color:var(--bg)}
+.nav-act a.cta{background:var(--accent);color:var(--on-accent);border-left-color:var(--accent)}
+.nav-act a.cta:hover{background:var(--fg);color:var(--bg);border-left-color:var(--border)}
+
+/* ═══ HERO — asymmetric 8:4 ═══ */
+.hero{border-bottom:var(--bd-thick) solid var(--border)}
+.hero-grid{display:grid;grid-template-columns:1fr}
+.hero-main{padding:var(--s8) 0 var(--s6)}
+@media(min-width:1024px){.hero-main{padding:var(--s16) 0 var(--s12)}}
+.hero h1{
+  font-size:clamp(56px,12vw,11rem);line-height:.84;font-weight:900;
+  letter-spacing:-.055em;text-transform:uppercase;margin:var(--s4) 0 var(--s6)}
+.hero h1 .red{color:var(--accent)}
+.hero-lead{max-width:52ch;font-size:clamp(17px,1.6vw,21px);line-height:1.45;
+  border-left:var(--bd-thick) solid var(--accent);padding-left:var(--s3);margin-bottom:var(--s6)}
+.hero-cta{display:flex;flex-direction:column;gap:var(--s2)}
+@media(min-width:640px){.hero-cta{flex-direction:row}}
+.hero-cta .btn{width:100%}
+@media(min-width:640px){.hero-cta .btn{width:auto}}
+
+@media(min-width:1024px){}
+
+/* ═══ TICKER ═══ */
+.ticker{border-bottom:var(--bd-thick) solid var(--border);overflow:hidden;background:var(--fg);color:var(--bg)}
+.ticker-track{display:flex;gap:var(--s8);padding:var(--s2) 0;white-space:nowrap;
+  animation:slide 32s linear infinite;will-change:transform}
+@keyframes slide{to{transform:translateX(-50%)}}
+.ticker-track span{font-size:12px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;
+  display:flex;align-items:center;gap:var(--s8)}
+.ticker-track i{width:8px;height:8px;background:var(--accent);display:inline-block}
+
+/* ═══ STATS — 4 across, visible grid ═══ */
+.stats{display:grid;grid-template-columns:repeat(2,1fr);border-bottom:var(--bd-thick) solid var(--border)}
+@media(min-width:1024px){.stats{grid-template-columns:repeat(4,1fr)}}
+.stat{padding:var(--s6) var(--s3);border-right:var(--bd) solid var(--border);
+  border-bottom:var(--bd) solid var(--border);transition:background var(--snap),color var(--snap)}
+@media(min-width:1024px){.stat{border-bottom:0;padding:var(--s8) var(--s4)}
+  .stat:last-child{border-right:0}}
+.stat:hover{background:var(--accent);color:var(--on-accent)}
+.stat-n{font-size:clamp(44px,5.5vw,76px);font-weight:900;letter-spacing:-.05em;line-height:.9;
+  display:block;transition:transform var(--out);transform-origin:left center}
+.stat:hover .stat-n{transform:scale(1.05)}
+.stat-l{margin-top:var(--s2);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase}
+
+/* ═══ SECTION SHELL ═══ */
+.sec{border-bottom:var(--bd-thick) solid var(--border)}
+.sec-head{display:grid;grid-template-columns:1fr;gap:var(--s3);
+  padding:var(--s8) 0 var(--s6)}
+@media(min-width:1024px){.sec-head{grid-template-columns:5fr 7fr;gap:var(--s8);padding:var(--s12) 0 var(--s8)}}
+.sec-head h2{font-size:clamp(38px,5.5vw,84px);font-weight:900;line-height:.9;
+  letter-spacing:-.05em;text-transform:uppercase}
+.sec-head p{font-size:clamp(16px,1.4vw,19px);line-height:1.5;max-width:56ch;color:var(--fg-70)}
+
+/* ═══ FEATURES — asymmetric list, not cards ═══ */
+.feat{display:grid;grid-template-columns:1fr;border-top:var(--bd) solid var(--border);
+  transition:background var(--snap),color var(--snap)}
+@media(min-width:768px){.feat{grid-template-columns:auto 4fr 6fr;align-items:start}}
+.feat:hover{background:var(--accent);color:var(--on-accent)}
+.feat>*{padding:var(--s4) var(--s3)}
+@media(min-width:768px){.feat>*{padding:var(--s6) var(--s4)}}
+.feat-n{font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:.1em;
+  min-width:96px;color:var(--accent)}
+.feat:hover .feat-n{color:var(--on-accent)}
+.feat h3{font-size:clamp(22px,2.4vw,34px);font-weight:900;letter-spacing:-.03em;text-transform:uppercase;line-height:1}
+.feat-d{font-size:16px;line-height:1.55;color:var(--fg-70);display:flex;gap:var(--s3);align-items:start}
+.feat:hover .feat-d{color:var(--on-accent)}
+.feat-arrow{margin-left:auto;flex-shrink:0;transform:rotate(-45deg);transition:transform var(--out)}
+.feat:hover .feat-arrow{transform:rotate(0deg)}
+
+/* ═══ METHOD — 3 col with visible dividers ═══ */
+.method{display:grid;grid-template-columns:1fr}
+@media(min-width:768px){.method{grid-template-columns:repeat(3,1fr)}}
+.step{padding:var(--s6) var(--s3);border-top:var(--bd) solid var(--border)}
+@media(min-width:768px){.step{padding:var(--s8) var(--s4);border-right:var(--bd) solid var(--border)}
+  .step:last-child{border-right:0}}
+.step-n{font-family:var(--mono);font-size:56px;font-weight:700;line-height:1;
+  color:var(--accent);letter-spacing:-.04em;display:block;margin-bottom:var(--s4)}
+.step h3{font-size:20px;font-weight:900;text-transform:uppercase;letter-spacing:-.02em;margin-bottom:var(--s2)}
+.step p{font-size:15.5px;line-height:1.55;color:var(--fg-70)}
+
+/* ═══ QUOTES ═══ */
+.quotes{display:grid;grid-template-columns:1fr}
+@media(min-width:768px){.quotes{grid-template-columns:repeat(3,1fr)}}
+.quote{padding:var(--s6) var(--s3);border-top:var(--bd) solid var(--border);
+  transition:transform var(--snap),border-color var(--snap);display:flex;flex-direction:column}
+@media(min-width:768px){.quote{padding:var(--s6) var(--s4);border-right:var(--bd) solid var(--border)}
+  .quote:last-child{border-right:0}}
+.quote:hover{transform:translateY(-1px);border-top-color:var(--accent)}
+.quote blockquote{font-size:20px;font-weight:500;line-height:1.35;letter-spacing:-.02em;margin-bottom:var(--s4)}
+.quote:hover blockquote{color:var(--accent)}
+.qwho{margin-top:auto;display:flex;align-items:center;gap:var(--s2);
+  padding-top:var(--s3);border-top:var(--bd) solid var(--border)}
+.qwho i{width:36px;height:36px;background:var(--fg);color:var(--bg);display:grid;place-items:center;
+  font-size:11px;font-weight:700;font-style:normal;flex-shrink:0}
+.qwho b{display:block;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.qwho span{display:block;font-size:12px;color:var(--fg-45)}
+
+/* ═══ CTA ═══ */
+.cta{background:var(--fg);color:var(--bg);border-bottom:var(--bd-thick) solid var(--border)}
+.cta-in{display:grid;grid-template-columns:1fr;gap:var(--s6);padding:var(--s12) 0}
+@media(min-width:1024px){.cta-in{grid-template-columns:7fr 5fr;align-items:end;padding:var(--s16) 0}}
+.cta h2{font-size:clamp(44px,7.5vw,7rem);font-weight:900;line-height:.85;
+  letter-spacing:-.055em;text-transform:uppercase}
+.cta h2 em{font-style:normal;color:var(--accent)}
+.cta-side p{font-size:17px;line-height:1.5;margin-bottom:var(--s4);opacity:.8}
+.cta .btn{border-color:var(--bg);background:var(--bg);color:var(--fg);width:100%}
+.cta .btn:hover{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+
+/* ═══ FOOTER ═══ */
+.foot{display:grid;grid-template-columns:1fr;gap:var(--s6);padding:var(--s8) 0}
+@media(min-width:768px){.foot{grid-template-columns:2fr 1fr 1fr 1fr}}
+.foot h4{font-size:11px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  margin-bottom:var(--s3);color:var(--accent)}
+.foot ul{list-style:none;display:flex;flex-direction:column;gap:var(--s1)}
+.foot a{font-size:14px;transition:color var(--snap)}
+.foot a:hover{color:var(--accent)}
+.foot-base{display:flex;justify-content:space-between;flex-wrap:wrap;gap:var(--s2);
+  padding:var(--s3) 0;border-top:var(--bd) solid var(--border);font-size:11px;
+  letter-spacing:.12em;text-transform:uppercase;font-weight:700}
+
+/* theme toggle */
+.theme-btn{display:flex;align-items:center;justify-content:center;width:64px;
+  border-left:var(--bd) solid var(--border);color:var(--fg);
+  transition:background var(--snap),color var(--snap)}
+.theme-btn:hover{background:var(--fg);color:var(--bg)}
+.theme-btn .ti{width:18px;height:18px;stroke:currentColor;stroke-width:2;
+  stroke-linecap:square;stroke-linejoin:miter;fill:none}
+
+/* dark: the hero composition and ticker invert with the tokens, but the
+   red circle keeps its ring — red never changes, it is the signal colour */
+html.dark html.dark 
+/* ═══ MOBILE ═══ */
+@media(max-width:900px){
+  .nav-in{height:64px}
+  .brand{padding-right:var(--s3);margin-right:var(--s3)}
+  .brand-name{font-size:16px}
+  .nav-act a{padding:0 var(--s3);font-size:10px}
+  .hero-main{padding:var(--s6) 0 var(--s4)}
+  .hero h1{font-size:clamp(44px,13vw,72px);margin:var(--s3) 0 var(--s4)}
+  .hero-lead{font-size:16px;padding-left:var(--s2);margin-bottom:var(--s4)}
+  .sec-head{padding:var(--s6) 0 var(--s4)}
+  .feat-n{padding-bottom:0}
+  .feat h3{padding-top:var(--s1)}
+  .feat-d{padding-top:var(--s1)}
+  .cta-in{padding:var(--s8) 0}
+}
+@media(max-width:560px){
+  .theme-btn{width:52px}
+  body{font-size:15px}
+  .wrap{padding:0 var(--s2)}
+  .nav-in{height:60px}
+  .nav-act a{padding:0 var(--s2);font-size:9.5px;letter-spacing:.1em}
+  .brand{padding-right:var(--s2);margin-right:var(--s2)}
+  .brand-mark{width:24px;height:24px}
+  .brand-mark::after{inset:6px}
+  .hero{padding-bottom:0}
+  .hero h1{font-size:clamp(40px,14vw,60px);line-height:.92}
+  .btn{height:56px;font-size:12px;width:100%}
+  .stat{padding:var(--s4) var(--s2)}
+  .stat-n{font-size:clamp(36px,11vw,52px)}
+  .stat-l{font-size:10px}
+  .sec-head h2{font-size:clamp(32px,10vw,46px)}
+  .sec-head p{font-size:15px}
+  .feat>*{padding:var(--s2)}
+  .feat-n{padding-bottom:0;font-size:11px}
+  .feat h3{font-size:22px;padding-top:0;padding-bottom:var(--s1)}
+  .feat-d{font-size:15px;padding-top:0}
+  .feat-arrow{display:none}
+  .step,.quote{padding:var(--s4) var(--s2)}
+  .step-n{font-size:40px;margin-bottom:var(--s2)}
+  .quote blockquote{font-size:18px}
+  .cta-in{padding:var(--s6) 0}
+  .cta h2{font-size:clamp(40px,14vw,60px)}
+  .foot{padding:var(--s6) 0;gap:var(--s4)}
+  .foot-base{flex-direction:column;gap:var(--s1);text-align:left}
+  .ticker-track{gap:var(--s4)}
+  .ticker-track span{gap:var(--s4);font-size:11px}
+}
+/* touch: no hover, use active */
+@media(hover:none){
+  .feat:active{background:var(--accent);color:var(--on-accent)}
+  .stat:active{background:var(--accent);color:var(--on-accent)}
+  .nlink:hover span{transform:none}
+}
+
+/* reveal — mechanical, no easing flourish */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .3s ease-out,transform .3s ease-out}
+.rv.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}}
+</style>
+</head>
+<body class="swiss-noise">
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
+<symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="18.4" x2="19.8" y2="19.8"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.2" y1="19.8" x2="5.6" y2="18.4"/><line x1="18.4" y1="5.6" x2="19.8" y2="4.2"/></symbol>
+</defs></svg>
+
+<!-- ═══ NAV ═══ -->
+<nav class="nav">
+  <div class="wrap nav-in">
+    <a href="#" class="brand"><span class="brand-mark"></span><span class="brand-name">Phønix</span></a>
+    <div class="nav-links">
+      <a href="#system" class="nlink"><span>01. System</span><span>01. System</span></a>
+      <a href="#method" class="nlink"><span>02. Method</span><span>02. Method</span></a>
+      <a href="#voices" class="nlink"><span>03. Evidence</span><span>03. Evidence</span></a>
+      <a href="#access" class="nlink"><span>04. Access</span><span>04. Access</span></a>
+    </div>
+    <div class="nav-act">
+      <button class="theme-btn" data-theme-toggle onclick="PhonixTheme.toggle()" aria-label="Toggle theme">
+        <svg class="ti" viewBox="0 0 24 24"><use href="#i-moon"/></svg>
+      </button>
+      <a href="/login">Sign in</a>
+      <a href="/login" class="cta">Start free</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-main">
+      <div class="sec-label rv"><b>01</b><span>Artificial Intelligence / Workspace</span></div>
+      <h1 class="rv">Think<br>Without<br><span class="red">Limits.</span></h1>
+      <p class="hero-lead rv">An AI workspace that reasons through hard problems, remembers your
+        context, searches your documents, and builds artifacts you keep. Not a chatbot.</p>
+      <div class="hero-cta rv">
+        <a href="/login" class="btn btn-accent">Start for free</a>
+        <a href="#system" class="btn btn-2">View the system</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══ TICKER ═══ -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-track">
+    <span>Deep Reasoning <i></i> Living Memory <i></i> Grounded Citations <i></i> Versioned Artifacts <i></i> Real Tools <i></i></span>
+    <span>Deep Reasoning <i></i> Living Memory <i></i> Grounded Citations <i></i> Versioned Artifacts <i></i> Real Tools <i></i></span>
+  </div>
+</div>
+
+<!-- ═══ STATS ═══ -->
+<section class="stats">
+  <div class="stat"><span class="stat-n num">50</span><span class="stat-l">Free msgs / day</span></div>
+  <div class="stat"><span class="stat-n num">&lt;1s</span><span class="stat-l">To first token</span></div>
+  <div class="stat"><span class="stat-n num">08</span><span class="stat-l">Built-in tools</span></div>
+  <div class="stat"><span class="stat-n num">∞</span><span class="stat-l">Saved history</span></div>
+</section>
+
+<!-- ═══ 01. SYSTEM ═══ -->
+<section class="sec" id="system">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label rv"><b>01</b><span>System</span></div>
+        <h2 class="rv">Built for<br>real work</h2>
+      </div>
+      <p class="rv">Not a wrapper around a model. A workspace that holds context, reasons
+        deliberately, cites its sources, and produces output you can keep and revise.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <article class="feat rv">
+      <div class="feat-n">01 / REASON</div>
+      <div><h3>Deep reasoning</h3></div>
+      <div class="feat-d"><span>Decomposes hard problems, tests its own assumptions, then answers — instead of guessing confidently.</span>
+        <svg class="feat-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </article>
+    <article class="feat rv">
+      <div class="feat-n">02 / RECALL</div>
+      <div><h3>Living memory</h3></div>
+      <div class="feat-d"><span>Your stack, tone and goals persist across every session. It learns as you work.</span>
+        <svg class="feat-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </article>
+    <article class="feat rv">
+      <div class="feat-n">03 / GROUND</div>
+      <div><h3>Cited answers</h3></div>
+      <div class="feat-d"><span>Searches your documents and cites exactly what it used. No invented sources.</span>
+        <svg class="feat-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </article>
+    <article class="feat rv">
+      <div class="feat-n">04 / BUILD</div>
+      <div><h3>Artifacts</h3></div>
+      <div class="feat-d"><span>Documents and code are versioned, editable, publishable — and yours.</span>
+        <svg class="feat-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </article>
+    <article class="feat rv">
+      <div class="feat-n">05 / EXECUTE</div>
+      <div><h3>Real tools</h3></div>
+      <div class="feat-d"><span>Runs code in a sandbox, computes exact arithmetic, reads the live web.</span>
+        <svg class="feat-arrow" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></div>
+    </article>
+  </div>
+</section>
+
+<!-- ═══ 02. METHOD ═══ -->
+<section class="sec tex" id="method">
+  <div class="tex-layer swiss-dots tex-dots"></div>
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label rv"><b>02</b><span>Method</span></div>
+        <h2 class="rv">Three steps</h2>
+      </div>
+      <p class="rv">No setup rituals. No credit card. Sign in and start.</p>
+    </div>
+  </div>
+  <div class="wrap method">
+    <div class="step rv"><span class="step-n">01</span><h3>Create account</h3>
+      <p>Free in seconds, or continue as a guest. Fifty messages a day, permanently.</p></div>
+    <div class="step rv"><span class="step-n">02</span><h3>Ask anything</h3>
+      <p>Code, analysis, writing. Attach files, use your voice, select the model that fits the task.</p></div>
+    <div class="step rv"><span class="step-n">03</span><h3>Resume anywhere</h3>
+      <p>Every conversation saved, searchable and cited. Context persists across sessions.</p></div>
+  </div>
+</section>
+
+<!-- ═══ 03. EVIDENCE ═══ -->
+<section class="sec" id="voices">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="sec-label rv"><b>03</b><span>Evidence</span></div>
+        <h2 class="rv">Field<br>reports</h2>
+      </div>
+      <p class="rv">From people who build things for a living.</p>
+    </div>
+  </div>
+  <div class="wrap quotes">
+    <figure class="quote rv">
+      <blockquote>“It shipped a working prototype while I was still writing the ticket.”</blockquote>
+      <figcaption class="qwho"><i>ML</i><span><b>Maya L.</b><span>Founder, Vector</span></span></figcaption>
+    </figure>
+    <figure class="quote rv">
+      <blockquote>“The memory is the killer feature. It knows my stack. I stopped re-explaining myself.”</blockquote>
+      <figcaption class="qwho"><i>RA</i><span><b>Rohan A.</b><span>Staff Engineer</span></span></figcaption>
+    </figure>
+    <figure class="quote rv">
+      <blockquote>“Clean, fast, and it stays out of my way. This is what a workspace should feel like.”</blockquote>
+      <figcaption class="qwho"><i>SK</i><span><b>Sara K.</b><span>Writer</span></span></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ═══ 04. ACCESS ═══ -->
+<section class="cta" id="access">
+  <div class="wrap cta-in">
+    <div>
+      <div class="sec-label rv" style="color:#fff"><b>04</b><span>Access</span></div>
+      <h2 class="rv" style="margin-top:var(--s3)">Start<br><em>Now.</em></h2>
+    </div>
+    <div class="cta-side rv">
+      <p>Free to start. No credit card. No catch. Fifty messages every day, permanently.</p>
+      <a href="/login" class="btn">Create free account</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a href="#" class="brand" style="border:0;margin:0;padding:0">
+        <span class="brand-mark"></span><span class="brand-name">Phønix</span>
+      </a>
+      <p style="margin-top:var(--s2);font-size:14px;color:var(--fg-70);max-width:34ch">
+        An AI workspace built on objective, verifiable output.</p>
+    </div>
+    <div><h4>Product</h4><ul><li><a href="#system">System</a></li><li><a href="#method">Method</a></li><li><a href="/login">Sign in</a></li></ul></div>
+    <div><h4>Resources</h4><ul><li><a href="/api/v1">API</a></li><li><a href="/health">Status</a></li><li><a href="#voices">Evidence</a></li></ul></div>
+    <div><h4>Legal</h4><ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li></ul></div>
+  </div>
+  <div class="wrap"><div class="foot-base"><span>© 2026 Phønix AI</span><span>Zürich / Rotterdam</span></div></div>
+</footer>
+
+<script>
+// Mechanical reveal — no stagger flourish, just presence.
+const io = new IntersectionObserver((es) => {
+  es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: .1, rootMargin: '0px 0px -40px' });
+document.querySelectorAll('.rv').forEach(el => io.observe(el));
+
+// Signed in? Point every CTA at the workspace.
+if (localStorage.getItem('phonix_token') || localStorage.getItem('phonix_guest')) {
+  document.querySelectorAll('a[href="/login"]').forEach(a => {
+    a.setAttribute('href', '/chat');
+    if (a.classList.contains('cta') || a.classList.contains('btn')) a.textContent = 'Open workspace';
+    else a.textContent = 'Workspace';
+  });
+}
+</script>
+</body>
+</html>

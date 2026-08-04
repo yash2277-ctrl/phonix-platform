@@ -1,0 +1,36 @@
+### PHØNIX API — open with the "REST Client" extension and click "Send Request"
+@host = http://localhost:3001
+@token = PASTE_ACCESS_TOKEN_HERE
+
+### Health
+GET {{host}}/health
+
+### API index
+GET {{host}}/api/v1
+
+### Register (copy accessToken from the response into @token above)
+POST {{host}}/api/v1/auth/register
+Content-Type: application/json
+
+{ "email": "you@example.com", "username": "you", "password": "strongpass123", "displayName": "You" }
+
+### Sign in
+POST {{host}}/api/v1/auth/login
+Content-Type: application/json
+
+{ "email": "you@example.com", "password": "strongpass123" }
+
+### Me
+GET {{host}}/api/v1/users/me
+Authorization: Bearer {{token}}
+
+### Available tools
+GET {{host}}/api/v1/tools
+Authorization: Bearer {{token}}
+
+### Run the calculator tool
+POST {{host}}/api/v1/tools/calculator/execute
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{ "input": { "expression": "(1234*5.5)/3" } }
